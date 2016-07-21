@@ -20,4 +20,5 @@ int main()
 
     copy(A.begin(), A.end(), ostream_iterator<int>(cout, " "));
     cout << endl;
+    cout << "27 17 10 16 13 9 1 5 7 12 4 8 3 0 <-- expected" << endl;
 }
