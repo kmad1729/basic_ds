@@ -86,4 +86,36 @@ class LinkedList {
             delete ret_node;
             return ret_val;
         }
+
+        void insert_nth(int n, int data) {
+            ListNode<T>* c_n = head;
+            ListNode<T>* prev = NULL;
+            for(int i = 0; i < n; i++) {
+                if(c_n == NULL)
+                    throw std::domain_error("cannot insert one past last elem");
+                prev = c_n;
+                c_n = (c_n -> next);
+            }
+
+            ListNode<T>* new_node = new ListNode<T>(data);
+            if(c_n == NULL) {
+                //empty list or last node
+                if(head == NULL) {
+                    head = new_node;
+                    tail = new_node;
+                } else {
+                    (tail -> next) = new_node;
+                    tail = new_node;
+                }
+            } else {
+                //start of the list or somewhere in the middle
+                if(prev == NULL) {
+                    (new_node -> next) = head;
+                    head = new_node;
+                } else {
+                    (new_node -> next) = c_n;
+                    (prev -> next) = new_node;
+                }
+            }
+        }
 };
