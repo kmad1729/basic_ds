@@ -18,3 +18,11 @@ void max_heapify(vector<int>& A, int index, int heap_size)
         max_heapify(A, largest, heap_size);
     }
 }
+
+void make_heap(vector<int>& A)
+{
+    int heap_size = A.size();
+    for(int i = heap_size / 2; i >= 0; i--) {
+        max_heapify(A, i, heap_size);
+    }
+}
