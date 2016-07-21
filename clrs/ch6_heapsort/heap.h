@@ -26,3 +26,14 @@ void make_heap(vector<int>& A)
         max_heapify(A, i, heap_size);
     }
 }
+
+void heap_sort(vector<int>& A)
+{
+    int heap_size = A.size();
+    make_heap(A);
+    for(int i = heap_size - 1; i > 0; i--) {
+        std::swap(A[i], A[0]);
+        heap_size--;
+        max_heapify(A, 0, heap_size);
+    }
+}
