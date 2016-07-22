@@ -163,4 +163,12 @@ class LinkedList {
             }
             head = new_head;
         }
+
+        void append(LinkedList<T>& other) {
+            ListNode<T>* new_tail = other.tail;
+            (tail -> next) = other.head;
+            tail = new_tail;
+            other.head = NULL;
+            other.tail = NULL;
+        }
 };
