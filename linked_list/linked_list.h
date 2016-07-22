@@ -153,5 +153,14 @@ class LinkedList {
         }
 
         void insert_sort() {
+            ListNode<T>* new_head = NULL;
+            ListNode<T>* c_n;
+            while(head != NULL) {
+                c_n = head;
+                head = (head -> next);
+                (c_n -> next) = NULL;
+                util_sorted_insert(new_head, c_n);
+            }
+            head = new_head;
         }
 };
