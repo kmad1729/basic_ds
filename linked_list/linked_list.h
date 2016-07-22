@@ -165,9 +165,13 @@ class LinkedList {
         }
 
         void append(LinkedList<T>& other) {
-            ListNode<T>* new_tail = other.tail;
-            (tail -> next) = other.head;
-            tail = new_tail;
+            if(head == NULL) {
+                head = other.head;
+                tail = other.tail;
+            } else {
+                (tail -> next) = other.head;
+                tail = other.tail;
+            }
             other.head = NULL;
             other.tail = NULL;
         }

@@ -42,4 +42,15 @@ int main()
     ll2.print_list();
     cout << delim;
 
+    LinkedList<int> empty_list;
+    cout << "appending ll1 to empty_list" << endl;
+    empty_list.append(ll1);
+    cout << "after append --> " << endl;
+    cout << "empty_list -->" << endl;
+    empty_list.print_list();
+    cout << "7 -> 5 -> 42 -> 6 -> 3 -> 323 -> 63 -> / <-- expected" << endl;
+    cout << "ll1 -->" << endl;
+    ll1.print_list();
+    cout << endl;
+
 }
