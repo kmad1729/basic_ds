@@ -17,6 +17,34 @@ class LinkedList {
     private:
         ListNode<T>* head;
         ListNode<T>* tail;
+
+        void util_sorted_insert(ListNode<T>* n) {
+            ListNode<T>* c_n;
+            ListNode<T>* prev = NULL;
+            for(c_n = head; c_n != NULL; c_n = (c_n -> next)) {
+                if((n -> data) <= (c_n -> data))
+                    break;
+                prev = c_n;
+            }
+            if(prev == NULL) {
+                if(head == NULL) {
+                    head = n;
+                    tail = n;
+                } else {
+                    (n -> next) = head;
+                    head = n;
+                }
+            } else {
+                if(c_n == NULL) {
+                    (prev -> next) = n;
+                    tail = n;
+                } else {
+                    (n -> next) = c_n;
+                    (prev -> next) = n;
+                }
+            }
+        }
+
     public:
         LinkedList() {
             head = NULL;
@@ -117,5 +145,10 @@ class LinkedList {
                     (prev -> next) = new_node;
                 }
             }
+        }
+
+        void sorted_insert(int data) {
+            ListNode<T>* n = new ListNode<T>(data);
+            util_sorted_insert(n);
         }
 };
