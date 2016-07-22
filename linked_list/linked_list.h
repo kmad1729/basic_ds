@@ -18,21 +18,21 @@ class LinkedList {
         ListNode<T>* head;
         ListNode<T>* tail;
 
-        void util_sorted_insert(ListNode<T>* n) {
+        void util_sorted_insert(ListNode<T>*& beg, ListNode<T>* n) {
             ListNode<T>* c_n;
             ListNode<T>* prev = NULL;
-            for(c_n = head; c_n != NULL; c_n = (c_n -> next)) {
+            for(c_n = beg; c_n != NULL; c_n = (c_n -> next)) {
                 if((n -> data) <= (c_n -> data))
                     break;
                 prev = c_n;
             }
             if(prev == NULL) {
-                if(head == NULL) {
-                    head = n;
+                if(beg == NULL) {
+                    beg = n;
                     tail = n;
                 } else {
-                    (n -> next) = head;
-                    head = n;
+                    (n -> next) = beg;
+                    beg = n;
                 }
             } else {
                 if(c_n == NULL) {
@@ -149,6 +149,9 @@ class LinkedList {
 
         void sorted_insert(int data) {
             ListNode<T>* n = new ListNode<T>(data);
-            util_sorted_insert(n);
+            util_sorted_insert(head, n);
+        }
+
+        void insert_sort() {
         }
 };
