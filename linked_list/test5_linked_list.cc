@@ -53,4 +53,29 @@ int main()
     ll1.print_list();
     cout << endl;
 
+    cout << delim;
+    cout << "append an empty list to other empty list" << endl;
+    LinkedList<int> el1;
+    LinkedList<int> el2;
+    cout << "el1 --> " << endl;
+    el1.print_list();
+    cout << "el2 --> " << endl;
+    el2.print_list();
+
+    el1.append(el2);
+    cout << "after el1.append(el2) --> " << endl;
+    cout << "el1 --> " << endl;
+    el1.print_list();
+    cout << "el2 --> " << endl;
+    el2.print_list();
+    cout << delim;
+
+    empty_list.append(el1);
+    cout << "after empty_list.append(el1) --> " << endl;
+    cout << "empty_list --> " << endl;
+    empty_list.print_list();
+    cout << "el1 --> " << endl;
+    el1.print_list();
+    cout << delim;
+
 }
