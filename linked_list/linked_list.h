@@ -213,4 +213,28 @@ class LinkedList {
                 curr_ptr = (curr_ptr -> next);
             }
         }
+
+        /*
+         * remove duplicates from a sorted list
+         */
+        void remove_duplicates() {
+            if(head == NULL)
+                return;
+            ListNode<T>* curr = head;
+            ListNode<T>* nxt = (curr -> next);
+            ListNode<T>* tmp = NULL;
+            while(nxt != NULL) {
+                if((curr -> data) == (nxt -> data)) {
+                    tmp = nxt;
+                    nxt = (nxt -> next);
+                    (curr -> next) = nxt;
+                    delete tmp;
+                } else {
+                    curr = nxt;
+                    nxt = (nxt -> next);
+                }
+            }
+            tail = curr;
+
+        }
 };
