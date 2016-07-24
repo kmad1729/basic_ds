@@ -237,4 +237,21 @@ class LinkedList {
             tail = curr;
 
         }
+
+        /*
+         * Take the node from the front of other, and move it to
+         * front of current list.
+         * It is an error to call this with the source list empty
+         */
+        void move_node(LinkedList<T>& other) {
+            if(other.head == NULL) {
+                throw std::domain_error("other list is empty!");
+            }
+            ListNode<T>* tmp = other.head;
+            (other.head) = ((other.head) -> next);
+            (tmp -> next) = head;
+            if(head == NULL)
+                tail = tmp;
+            head = tmp;
+        }
 };
