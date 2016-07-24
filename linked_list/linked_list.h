@@ -175,4 +175,42 @@ class LinkedList {
             other.head = NULL;
             other.tail = NULL;
         }
+
+        /*
+         * Split the nodes of a given list into front and back halves
+         * and return the two lists using the reference params
+         * If length is odd, extra node should go in the front list
+         */
+        void front_back_split(LinkedList<T>& front, LinkedList<T>& back) {
+            ListNode<T>* slow_ptr = head;
+            ListNode<T>* fast_ptr = head;
+            if(slow_ptr == NULL)
+                return;
+            fast_ptr = (fast_ptr -> next);
+            if(fast_ptr == NULL) {
+                front.push_back((slow_ptr -> data));
+                return;
+            }
+
+            slow_ptr = (slow_ptr -> next);
+            fast_ptr = (fast_ptr -> next);
+            while(fast_ptr != NULL) {
+                slow_ptr = (slow_ptr -> next);
+                fast_ptr = (fast_ptr -> next);
+                if(fast_ptr == NULL)
+                    break;
+                fast_ptr = (fast_ptr -> next);
+            }
+
+            ListNode<T>* curr_ptr = head;
+            while(curr_ptr != slow_ptr) {
+                front.push_back((curr_ptr -> data));
+                curr_ptr = (curr_ptr -> next);
+            }
+
+            while(curr_ptr != NULL) {
+                back.push_back((curr_ptr -> data));
+                curr_ptr = (curr_ptr -> next);
+            }
+        }
 };
