@@ -376,4 +376,55 @@ class LinkedList {
                 }
             }
         }
+
+        /*
+         * reverse:
+         *  reverse function that reverses a list by iteratively
+         *  rearranging all the next pointers
+         */
+        void reverse() {
+            ListNode<T>* new_head = NULL;
+            ListNode<T>* new_tail = NULL;
+            ListNode<T>* tmp = NULL;
+            while(head != NULL) {
+                tmp = head;
+                head = (head -> next);
+                if(new_head == NULL) {
+                    (tmp -> next) = NULL;
+                    new_head = tmp;
+                    new_tail = tmp;
+                } else {
+                    (tmp -> next) = new_head;
+                    new_head = tmp;
+                }
+            }
+
+            head = new_head;
+            tail = new_tail;
+        }
+
+        /*
+         * util_recursive_reverse:
+         *  utility function to reverse a linked list recursively.
+         *  Reterns the end of the list after reversal
+         */
+        ListNode<T>* util_recursive_reverse(ListNode<T>* n) {
+            if(n == NULL)
+                return n;
+            if((n -> next) == NULL)
+                return n;
+            ListNode<T>* new_tail = util_recursive_reverse(n -> next);
+            (new_tail -> next) = n;
+            return n;
+        }
+
+        void recursive_reverse() {
+            if(head == NULL)
+                return;
+            ListNode<T>* new_tail = util_recursive_reverse(head);
+            (new_tail -> next) = NULL;
+            head = tail;
+            tail = new_tail;
+        }
+
 };
