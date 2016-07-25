@@ -254,4 +254,35 @@ class LinkedList {
                 tail = tmp;
             head = tmp;
         }
+
+        /*
+         * shuffle_merge:
+         *  merge nodes of the two lists int oa single list taking a node alternately
+         *  from each list, and return the new list
+         */
+        void shuffle_merge(const LinkedList<T>& a, const LinkedList<T>& b) {
+            int counter = 0;
+            ListNode<T>* a_ptr = a.head;
+            ListNode<T>* b_ptr = b.head;
+            while(a_ptr != NULL && b_ptr != NULL) {
+                if(counter % 2 == 0) {
+                    push_back(a_ptr -> data);
+                    a_ptr = (a_ptr -> next);
+                } else {
+                    push_back(b_ptr -> data);
+                    b_ptr = (b_ptr -> next);
+                }
+                counter++;
+            }
+
+            ListNode<T>* rem_ptr = NULL;
+            if(a_ptr == NULL)
+                rem_ptr = b_ptr;
+            else
+                rem_ptr = a_ptr;
+            while(rem_ptr != NULL) {
+                push_back(rem_ptr -> data);
+                rem_ptr = (rem_ptr -> next);
+            }
+        }
 };
