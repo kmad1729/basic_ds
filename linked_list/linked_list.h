@@ -330,4 +330,29 @@ class LinkedList {
                 rem_ptr = (rem_ptr -> next);
             }
         }
+
+        /*
+         * merge_sort:
+         *  write the classic recursive merge_sort
+         */
+        void merge_sort() {
+            if(head != NULL && (head -> next) != NULL) {
+                LinkedList<T> left;
+                LinkedList<T> right;
+                front_back_split(left, right);
+
+                ListNode<T>* c_n = head;
+                ListNode<T>* tmp = NULL;
+                while(c_n != NULL) {
+                    tmp = c_n;
+                    c_n = (c_n -> next);
+                    delete tmp;
+                }
+                head = tail = NULL;
+
+                left.merge_sort();
+                right.merge_sort();
+                sorted_merge(left, right);
+            }
+        }
 };
