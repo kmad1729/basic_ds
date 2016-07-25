@@ -285,4 +285,19 @@ class LinkedList {
                 rem_ptr = (rem_ptr -> next);
             }
         }
+
+        /*
+         * alternating_split:
+         *  Given the source list, split its nodes into 2 shorter lists.
+         */
+        void alternating_split(LinkedList<T>& aRef, LinkedList<T>& bRef) {
+            int counter = 0;
+            for(ListNode<T>* curr = head; curr != NULL; curr = (curr -> next)) {
+                if(counter % 2 == 0)
+                    aRef.push_back(curr -> data);
+                else
+                    bRef.push_back(curr -> data);
+                counter++;
+            }
+        }
 };
