@@ -300,4 +300,34 @@ class LinkedList {
                 counter++;
             }
         }
+
+        /*
+         * sorted_merge:
+         *  Takes 2 lists in increasing order and 
+         *  splices their nodes together to make one big sorted list
+         */
+        void sorted_merge(const LinkedList<T>& a, const LinkedList<T>& b) {
+            ListNode<T>* a_ptr = a.head;
+            ListNode<T>* b_ptr = b.head;
+            while(a_ptr != NULL && b_ptr != NULL) {
+                if((a_ptr -> data) < (b_ptr -> data)) {
+                    push_back(a_ptr -> data);
+                    a_ptr = (a_ptr -> next);
+                } else {
+                    push_back(b_ptr -> data);
+                    b_ptr = (b_ptr -> next);
+                }
+            }
+
+            ListNode<T>* rem_ptr = NULL;
+            if(a_ptr == NULL)
+                rem_ptr = b_ptr;
+            else
+                rem_ptr = a_ptr;
+
+            while(rem_ptr != NULL) {
+                push_back(rem_ptr -> data);
+                rem_ptr = (rem_ptr -> next);
+            }
+        }
 };
