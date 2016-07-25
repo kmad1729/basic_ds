@@ -355,4 +355,25 @@ class LinkedList {
                 sorted_merge(left, right);
             }
         }
+
+        /*
+         * sorted_intersect:
+         *  given 2 sorted lists. Create and represent a new list representing the 
+         *  intersection of the two lists
+         */
+        void sorted_intersect(const LinkedList<T>& a, const LinkedList<T>& b) {
+            ListNode<T>* a_ptr = a.head;
+            ListNode<T>* b_ptr = b.head;
+            while(a_ptr != NULL && b_ptr != NULL) {
+                if((a_ptr -> data) < (b_ptr -> data))
+                    a_ptr = (a_ptr -> next);
+                else if((a_ptr -> data) > (b_ptr -> data))
+                    b_ptr = (b_ptr -> next);
+                else {
+                    push_back(a_ptr -> data);
+                    a_ptr = (a_ptr -> next);
+                    b_ptr = (b_ptr -> next);
+                }
+            }
+        }
 };
