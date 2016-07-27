@@ -427,4 +427,11 @@ class LinkedList {
             tail = new_tail;
         }
 
+        /*
+         * reverse_sub_list:
+         *  for given start and finish reverse the sublist [start, finish)
+         */
+        void reverse_sub_list(int start, int finish) {
+        }
+
 };
