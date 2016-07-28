@@ -1,8 +1,11 @@
 #!/usr/bin/env python3
 'tests for heap.py function'
 
+from collections import deque
 from random import randint
 import unittest
+
+from prob_6_5_6 import Queue_PQ
 
 from heap import max_heapify, build_max_heap, heap_sort, \
     heap_max, heap_extract_max, _parent, heap_increase_key, \
@@ -98,6 +101,34 @@ class TestHeaps(unittest.TestCase):
         print("#" * 20)
         exp_new_heap = [27, 20, 20, 7, 14, 9, 8, 2, 6, 4, 5, 6]
         self.assertEqual(exp_new_heap, max_heap)
+
+class Test_Queue_PQ(unittest.TestCase):
+    
+    def test_empty(self):
+        q1 = Queue_PQ()
+        self.assertTrue(q1.empty())
+
+    def test_enqueue_dequeue(self):
+        q1 = Queue_PQ()
+        q2 = deque()
+        for i in range(5):
+            elem = randint(1, 500)
+            q1.enqueue(elem)
+            q2.append(elem)
+
+        self.assertEqual(q1.dequeue(), q2.popleft())
+        self.assertEqual(q1.dequeue(), q2.popleft())
+        self.assertEqual(q1.front(), q2[0])
+
+        for i in range(7):
+            elem = randint(1, 500)
+            q1.enqueue(elem)
+            q2.append(elem)
+
+        while len(q2) != 0:
+            self.assertEqual(q1.dequeue(), q2.popleft())
+
+        self.assertEqual(0, len(q1))
 
 
 
