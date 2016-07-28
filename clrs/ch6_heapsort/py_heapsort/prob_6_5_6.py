@@ -24,8 +24,31 @@ class Queue_PQ:
     def front(self):
         return heap_max(self._pq)[1]
 
-    def __repr__(self):
-        return str(list(map(lambda x: x[1], self._pq)))
+    def __len__(self):
+        return len(self._pq)
+
+
+class Stack_PQ:
+
+    def __init__(self):
+        self._pq = []
+        self._last_ind = 0
+        self.lst_range_min = (float('-inf'), float('-inf'))
+
+    def push(self, elem):
+        max_heap_insert(self._pq, (self._last_ind, elem), self.lst_range_min)
+        self._last_ind += 1
+
+    def pop(self):
+        if len(self._pq) == 0:
+            raise Exception('cannot pop empty stack')
+        return heap_extract_max(self._pq)[1]
+
+    def empty(self):
+        return len(self._pq) == 0
+
+    def top(self):
+        return heap_max(self._pq)[1]
 
     def __len__(self):
         return len(self._pq)

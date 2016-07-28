@@ -5,7 +5,7 @@ from collections import deque
 from random import randint
 import unittest
 
-from prob_6_5_6 import Queue_PQ
+from prob_6_5_6 import Queue_PQ, Stack_PQ
 
 from heap import max_heapify, build_max_heap, heap_sort, \
     heap_max, heap_extract_max, _parent, heap_increase_key, \
@@ -129,6 +129,31 @@ class Test_Queue_PQ(unittest.TestCase):
             self.assertEqual(q1.dequeue(), q2.popleft())
 
         self.assertEqual(0, len(q1))
+
+class Test_Stack_PQ(unittest.TestCase):
+
+    def test_push_pop(self):
+        q1 = Stack_PQ()
+        q2 = deque()
+        for i in range(5):
+            elem = randint(1, 500)
+            q1.push(elem)
+            q2.append(elem)
+
+        self.assertEqual(q1.pop(), q2.pop())
+        self.assertEqual(q1.pop(), q2.pop())
+        
+        for i in range(50):
+            elem = randint(1, 500)
+            q1.push(elem)
+            q2.append(elem)
+
+        while len(q2) != 0:
+            elem1 = q1.pop()
+            elem2 = q2.pop()
+            print("popped {elem1} from q1 and {elem2} from q2".format(
+                elem1 = elem1, elem2 = elem2))
+            self.assertEqual(elem1, elem2)
 
 
 
