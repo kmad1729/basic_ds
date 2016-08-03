@@ -56,4 +56,4 @@ test15_linked_list: test15_linked_list.cc
 
 
 clean:
-	rm -rf $(_ALL)
+	rm -rf $(_ALL) *.dSYM
