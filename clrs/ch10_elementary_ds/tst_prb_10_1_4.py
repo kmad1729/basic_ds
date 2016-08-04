@@ -37,6 +37,7 @@ class Test_Queue(unittest.TestCase):
         except Exception as e:
             print("caught exception ({})".format(e))
 
+
 if __name__ == '__main__':
     unittest.main()
 
