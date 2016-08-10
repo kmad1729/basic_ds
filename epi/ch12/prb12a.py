@@ -39,6 +39,8 @@ class Test_GetFirstOccurence(unittest.TestCase):
         self.assertEqual(bisect_right(lst, tgt) , my_bisect_right(lst, tgt))
         tgt = -14
         self.assertEqual(bisect_right(lst, tgt) , my_bisect_right(lst, tgt))
+        tgt = -10
+        self.assertEqual(bisect_right(lst, tgt) , my_bisect_right(lst, tgt))
         tgt = 401
         self.assertEqual(bisect_right(lst, tgt) , my_bisect_right(lst, tgt))
         tgt = 400
