@@ -1,4 +1,6 @@
 from count_inversions import get_inversion
+import pickle
+import os
 
 f_name = 'inp.txt'
 
@@ -9,4 +11,6 @@ with open(f_name, 'r') as f:
         if l.strip():
             data.append(int(l))
 
-print("ans = : {}".format(get_inversion(data)))
+ans = get_inversion(data)
+assert ans == 2407905288
+print("ans = : {}".format(ans))

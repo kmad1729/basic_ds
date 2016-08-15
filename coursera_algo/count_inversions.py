@@ -1,41 +1,42 @@
 'count the number of inversions for a givne array'
 
-def count_and_sort(A):
-    n = len(A)
+def count_and_sort(A, start, end):
+    n = end - start
     if n <= 1:
-        return (A, 0)
-    (l1, x) = count_and_sort(A[:n//2])
-    (l2, y) = count_and_sort(A[n//2:])
-    (l3, z) = count_split_inv(l1, l2)
-    return (l3, x + y + z)
+        return 0
+    mid = start + n // 2
+    x = count_and_sort(A, start, mid)
+    y = count_and_sort(A, mid, end)
+    z = count_split_inv(A, start, end, mid)
+    return x + y + z
 
-def count_split_inv(l1, l2):
+def count_split_inv(A, p, q, r):
+    #A[p...r) is sorted
+    #A[r...q) is sorted
     i, j, result = 0, 0, 0
-    k = 0
-    result_list = [None] * (len(l1) + len(l2))
 
-    while k < (len(l1) + len(l2)):
-        if i != len(l1) and j != len(l2):
-            if l1[i] <= l2[j]:
-                result_list[k] = l1[i]
-                i += 1
-            else:
-                result_list[k] = l2[j]
-                j += 1
-                result += (len(l1) - i)
+    left = A[p:r] + [1e9]
+    right = A[r:q] + [1e9]
+
+    k = p
+    while k < q:
+        if left[i] <= right[j]:
+            A[k] = left[i]
+            i += 1
         else:
-            if i == len(l1):
-                result_list[k] = l2[j]
-                j += 1
-            else:
-                result_list[k] = l1[i]
-                i += 1
+            A[k] = right[j]
+            j += 1
+            if left[i] != 1e9:
+                result += (len(left) - i - 1)
+
         k += 1
 
-    return (result_list, result)
+    return result
 
 def get_inversion(A):
-    sorted_arr, invs = count_and_sort(A)
+    #print("before sort A = {}".format(A))
+    invs = count_and_sort(A, 0, len(A))
+    #print("after sort A = {}".format(A))
     return invs
 
 import unittest
@@ -50,6 +51,19 @@ class Test_Count_inversion(unittest.TestCase):
         lst3 = [1, 2, 3, 4, 5, 6]
         self.assertEqual(0, get_inversion(lst3))
 
+        lst4 = [37, 7, 2, 14, 35, 47, 10, 24, 44, 17, 34, 11, 16, 48, 1, 39, 6, 
+                33, 43, 26, 40, 4, 28, 5, 38, 41, 42, 12, 13, 21, 29, 18, 3, 19, 
+                0, 32, 46, 27, 31, 25, 15, 36, 20, 8, 9, 49, 22, 23, 30, 45]
+        self.assertEqual(590, get_inversion(lst4))
+
+        lst5 = [4, 80, 70, 23, 9, 60, 68, 27, 66, 78, 12, 40, 52, 53, 44, 
+                8, 49, 28, 18, 46, 21, 39, 51, 7, 87, 99, 69, 62, 84, 6, 79, 
+                67, 14, 98, 83, 0, 96, 5, 82, 10, 26, 48, 3, 2, 15, 92, 11, 55, 
+                63, 97, 43, 45, 81, 42, 95, 20, 25, 74, 24, 72, 91, 35, 86, 19, 
+                75, 58, 71, 47, 76, 59, 64, 93, 17, 50, 56, 94, 90, 89, 32, 37, 
+                34, 65, 1, 73, 41, 36, 57, 77, 30, 22, 13, 29, 38, 16, 88, 61, 
+                31, 85, 33, 54]
+        self.assertEqual(2372, get_inversion(lst5))
 
 
 
