@@ -10,16 +10,16 @@ def count_and_sort(A, start, end):
     z = count_split_inv(A, start, end, mid)
     return x + y + z
 
-def count_split_inv(A, p, q, r):
-    #A[p...r) is sorted
-    #A[r...q) is sorted
+def count_split_inv(A, start, end, mid):
+    #A[start...mid) is sorted
+    #A[mid...end) is sorted
     i, j, result = 0, 0, 0
 
-    left = A[p:r] + [1e9]
-    right = A[r:q] + [1e9]
+    left = A[start:mid] + [1e9]
+    right = A[mid:end] + [1e9]
 
-    k = p
-    while k < q:
+    k = start
+    while k < end:
         if left[i] <= right[j]:
             A[k] = left[i]
             i += 1
