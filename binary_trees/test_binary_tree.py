@@ -28,6 +28,14 @@ class TestBinaryTree(unittest.TestCase):
         self.assertEqual(4, self.tr.maxDepth())
         self.assertEqual(5, self.bst.maxDepth())
 
+    def test_printInOrder(self):
+        print("printing bst -->")
+        self.bst.printInOrder()
+        print("printing normal tree -->")
+        self.tr.printInOrder()
+        print("printing empty tree")
+        self.empty_tr.printInOrder()
+
 
 class TestBinarySearchTree(unittest.TestCase):
     def setUp(self):

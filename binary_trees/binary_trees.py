@@ -25,6 +25,17 @@ class BinaryTree:
     def maxDepth(self):
         return self._util_maxDepth(self.root)
 
+    def _util_printInOrder(self, n):
+        if n != None:
+            self._util_printInOrder(n['left'])
+            print(n['data'], end = " ")
+            self._util_printInOrder(n['right'])
+
+    def printInOrder(self):
+        print('(', end = "")
+        self._util_printInOrder(self.root)
+        print(")")
+
 
 class BinarySearchTree(BinaryTree):
 
