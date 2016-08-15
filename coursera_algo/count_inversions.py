@@ -18,8 +18,7 @@ def count_split_inv(A, start, end, mid):
     left = A[start:mid] + [1e9]
     right = A[mid:end] + [1e9]
 
-    k = start
-    while k < end:
+    for k in range(start, end):
         if left[i] <= right[j]:
             A[k] = left[i]
             i += 1
@@ -28,8 +27,6 @@ def count_split_inv(A, start, end, mid):
             j += 1
             if left[i] != 1e9:
                 result += (len(left) - i - 1)
-
-        k += 1
 
     return result
 
