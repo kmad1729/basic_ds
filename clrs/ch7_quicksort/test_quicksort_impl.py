@@ -19,7 +19,7 @@ class Test_Quicksort_impl(unittest.TestCase):
         self.assertEqual(expected_lst, lst1)
 
         lst2 = [5] * 5
-        self.assertEqual(0, partition(lst2, 0, len(lst2) - 1))
+        self.assertEqual(4, partition(lst2, 0, len(lst2) - 1))
 
     def test_quicksort(self):
         lst1 = [2, 5, 4, 7, 3, 1, 6]

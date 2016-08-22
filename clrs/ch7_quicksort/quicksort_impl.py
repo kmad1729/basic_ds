@@ -7,7 +7,7 @@ def partition(A, p, r):
     i = p - 1
 
     for j in range(p, r):
-        if A[j] < x:
+        if A[j] <= x:
             i += 1
             A[i], A[j] = A[j], A[i]
 
@@ -20,4 +20,5 @@ def quicksort(A, p, r):
         q = partition(A, p, r)
         quicksort(A, p, q - 1)
         quicksort(A, q + 1, r)
+
 
