@@ -18,8 +18,17 @@ def default_pivot_first_elem(A, p, r):
 def default_pivot_last_elem(A, p, r):
     return r
 
-comps1 = quicksort(data, 0, len(data) - 1, default_pivot_first_elem)
-comps2 = quicksort(data, 0, len(data) - 1, default_pivot_last_elem)
+def default_pivot_median_of_3(A, p , r):
+    first_elem = (A[p], p)
+    last_elem = (A[r], r)
+    mid_elem_ind = p + (r - p) // 2
+    mid_elem = (A[mid_elem_ind], mid_elem_ind)
+    return sorted([first_elem, last_elem, mid_elem])[1][1]
+
+comps1 = quicksort(data[:], 0, len(data) - 1, default_pivot_first_elem)
+comps2 = quicksort(data[:], 0, len(data) - 1, default_pivot_last_elem)
+comps3 = quicksort(data[:], 0, len(data) - 1, default_pivot_median_of_3)
 
 print("number of comparisions with first elem as pivot = {}".format(comps1))
 print("number of comparisions with last elem as pivot = {}".format(comps2))
+print("number of comparisions with median of 3 elem as pivot = {}".format(comps3))
