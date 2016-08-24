@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
 
-'tests for binary_trees.py'
+'tests for binary_tree.py'
 
-from binary_trees import BinaryTree, BinarySearchTree,\
+from binary_tree import BinaryTree, BinarySearchTree,\
         get_toy_binary_tree, get_empty_tree, get_toy_binary_search_tree
 
 import unittest

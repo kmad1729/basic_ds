@@ -118,3 +118,77 @@ def get_toy_binary_tree():
     new_obj.root = root
     return new_obj
 
+
+def get_toy_binary_tree2():
+    'Get a toy binary tree (something with data) to work with'
+    '''
+                    5
+             /            \
+            3              8
+         /      \        /   \
+        9        6      42    28
+                /      /     /   \
+               8      7     0     86
+                     / \    
+                    98 23
+
+
+                
+    '''
+    root = {
+        'data':5,
+        'left':{
+            'data':3,
+            'left':{
+                'data':9,
+                'left':None,
+                'right': None,
+                },
+            'right':{
+                'data':6,
+                'left': {
+                    'data': 8,
+                    'left': None,
+                    'right': None,
+                },
+                'right':None
+                },
+            },
+        'right':{
+            'data':8,
+            'left':{
+                'data':42,
+                'left': {
+                    'data': 7,
+                    'left': {
+                        'data': 96,
+                        'left': None,
+                        'right': None,
+                    },
+                    'right' : {
+                        'data': 23,
+                        'left':None,
+                        'right':None,
+                    },
+                },
+                'right': None,
+            },
+            'right':{
+                'data':28,
+                'left': {
+                    'data': 0,
+                    'left': None,
+                    'right': None,
+                },
+                'right': {
+                    'data': 86,
+                    'left':None,
+                    'right': None,
+                },
+            },
+        },
+        }
+    new_obj = BinaryTree()
+    new_obj.root = root
+    return new_obj
+
