@@ -40,11 +40,12 @@ class TestBinaryTree(unittest.TestCase):
         in_ordr = [1, 3, 16, 29, 14, 86, 4, 18, 69, 63, 141]
         pre_ordr = [4, 3, 1, 29, 16, 86, 14, 69, 18, 141, 63]
         post_order = [1, 16, 14, 86, 29, 3, 18, 63, 141, 69, 4]
-        tr = BinarySearchTree.from_in_and_pre_order_traversal(in_ordr, pre_ordr)
+        tr = BinaryTree.from_in_and_pre_order_traversal(in_ordr, pre_ordr)
         print("printing post order -->")
         tr.printPostOrder()
         print("expected order -->")
         print("(" + " ".join(map(str, post_order)) + " )")
+        self.assertEqual(5, tr.maxDepth())
 
 
 class TestBinarySearchTree(unittest.TestCase):
