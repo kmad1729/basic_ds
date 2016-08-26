@@ -31,6 +31,17 @@ class BinaryTree:
             print(n['data'], end = " ")
             self._util_printInOrder(n['right'])
 
+    def _util_printPostOrder(self, n):
+        if n != None:
+            self._util_printPostOrder(n['left'])
+            self._util_printPostOrder(n['right'])
+            print(n['data'], end = " ")
+
+    def printPostOrder(self):
+        print('(', end = "")
+        self._util_printPostOrder(self.root)
+        print(")")
+
     def printInOrder(self):
         print('(', end = "")
         self._util_printInOrder(self.root)
@@ -45,16 +56,21 @@ class BinaryTree:
         if len(in_order_traversal) == 0:
             return None
 
-        curr_node = {'data' : pre_order_traversal[
-
+        curr_node = {'data' : pre_order_traversal[0]}
+        c_n_in_ordr_idx = in_order_traversal.index(curr_node['data'])
+        curr_node['left'] = self._utils_get_node_from_traversals(
+                in_order_traversal[:c_n_in_ordr_idx],
+                pre_order_traversal[1: 1 + c_n_in_ordr_idx])
+        curr_node['right'] = self._utils_get_node_from_traversals(
+                in_order_traversal[c_n_in_ordr_idx + 1:],
+                pre_order_traversal[1 + c_n_in_ordr_idx:])
+        return curr_node
 
 
     @classmethod
     def from_in_and_pre_order_traversal(cls, in_order_traversal, pre_order_traversal):
-        result = 0 #bug if elems has 0 then edge case
-        for elem in in_order_traversal:
-            result ^= elem
-        assert result == 0, "in_order_traversal ({in_order}) has duplicates".format(
+        result = (len(in_order_traversal) == len(set(in_order_traversal)))
+        assert result, "in_order_traversal ({in_order}) has duplicates".format(
                 in_order = in_order_traversal)
         
         result_obj = cls()
@@ -63,8 +79,6 @@ class BinaryTree:
             pre_order_traversal)
 
         return result_obj
-
-
 
 
 class BinarySearchTree(BinaryTree):
