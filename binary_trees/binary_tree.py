@@ -36,6 +36,36 @@ class BinaryTree:
         self._util_printInOrder(self.root)
         print(")")
 
+    
+    def _utils_get_node_from_traversals(self, in_order_traversal, pre_order_traversal):
+        assert len(in_order_traversal) == len(pre_order_traversal), \
+            "in_order -> \n({in_order} != \npre_order ->\n({pre_order})".format(
+                    in_order = in_order_traversal, pre_order = pre_order_traversal)
+
+        if len(in_order_traversal) == 0:
+            return None
+
+        curr_node = {'data' : pre_order_traversal[
+
+
+
+    @classmethod
+    def from_in_and_pre_order_traversal(cls, in_order_traversal, pre_order_traversal):
+        result = 0 #bug if elems has 0 then edge case
+        for elem in in_order_traversal:
+            result ^= elem
+        assert result == 0, "in_order_traversal ({in_order}) has duplicates".format(
+                in_order = in_order_traversal)
+        
+        result_obj = cls()
+
+        result_obj.root = result_obj._utils_get_node_from_traversals(in_order_traversal, 
+            pre_order_traversal)
+
+        return result_obj
+
+
+
 
 class BinarySearchTree(BinaryTree):
 
