@@ -27,6 +27,15 @@ class Test_prb3A(unittest.TestCase):
 
         self.assertEqual(7, get_largest_complete_subtree_size(tr))
 
+    def test_basic_functionality1(self):
+        in_order = [4, 7, 8, 16, 12]
+        pre_order = [8, 7, 4, 12, 6]
+        tr = BinaryTree.from_in_and_pre_order_traversal(in_order, pre_order)
+
+
+        self.assertEqual(1, get_largest_complete_subtree_size(tr))
+
+
 
 if __name__ == '__main__':
     unittest.main()
