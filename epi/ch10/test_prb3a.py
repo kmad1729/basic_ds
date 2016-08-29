@@ -29,7 +29,7 @@ class Test_prb3A(unittest.TestCase):
 
     def test_basic_functionality1(self):
         in_order = [4, 7, 8, 16, 12]
-        pre_order = [8, 7, 4, 12, 6]
+        pre_order = [8, 7, 4, 12, 16]
         tr = BinaryTree.from_in_and_pre_order_traversal(in_order, pre_order)
 
 
