@@ -96,10 +96,6 @@ class BinaryTreeWithPrarent(BinaryTree):
 
 
 
-
-
-
-
 class BinarySearchTree(BinaryTree):
 
     def _util_insert(self, data, n):
