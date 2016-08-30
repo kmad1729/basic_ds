@@ -81,6 +81,25 @@ class BinaryTree:
         return result_obj
 
 
+class BinaryTreeWithPrarent(BinaryTree):
+    'binary tree where each node stores pointer to parent also'
+
+    def __populate_node_from_binary_tree(self, n, parent = None):
+        if n != None:
+            n['parent'] = parent
+            self.__populate_node_from_binary_tree(n['left'], n)
+            self.__populate_node_from_binary_tree(n['right'], n)
+
+
+    def populate_parent(self):
+        self.__populate_node_from_binary_tree(self.root)
+
+
+
+
+
+
+
 class BinarySearchTree(BinaryTree):
 
     def _util_insert(self, data, n):
