@@ -21,6 +21,9 @@ def randomized_partition(A, start_ind, end_ind):
 def random_select(A, start_ind, end_ind, i_order_to_find):
     'find the ith order statistic from array A'
 
+    if start_ind == end_ind:
+        return A[start_ind]
+
     j = randomized_partition(A, start_ind, end_ind)
     k = j - start_ind
 

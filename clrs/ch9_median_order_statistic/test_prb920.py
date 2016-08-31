@@ -19,7 +19,7 @@ class Test_randomized_partition(unittest.TestCase):
 
 class Test_randomize_select(unittest.TestCase):
     def test_basic_functionality(self):
-        A = [7, 1, 3, 4, 2, 8, 5, 6]
+        A = [7, 1, 11, 3, 12, 4, 9, 2, 10, 8, 5, 6]
 
         i = 6
         self.assertEqual(i, random_select(A, 0, len(A) - 1, i))
@@ -32,6 +32,10 @@ class Test_randomize_select(unittest.TestCase):
         print(A)
 
 
+        i = 1
+        self.assertEqual(i, random_select(A, 0, len(A) - 1, i))
+        print("after finding {}st smallest element A -->".format(i))
+        print(A)
 
 if __name__ == '__main__':
     unittest.main()
