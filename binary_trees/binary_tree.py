@@ -220,7 +220,7 @@ def get_toy_binary_tree2():
                 'left': {
                     'data': 7,
                     'left': {
-                        'data': 96,
+                        'data': 98,
                         'left': None,
                         'right': None,
                     },
