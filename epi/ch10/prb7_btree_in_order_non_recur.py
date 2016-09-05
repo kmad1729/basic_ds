@@ -22,6 +22,18 @@ def print_in_order_non_recur(n):
                 util_stack.append((top_node['left'], False))
     return result
 
+def print_in_order_non_recur_book_sol(n):
+    util_stack = []
+    result = []
+    while len(util_stack) != 0 or n != None:
+        if n != None:
+            util_stack.append(n)
+            n = n['left']
+        else:
+            c_n = util_stack.pop()
+            result.append(c_n['data'])
+            n = c_n['right']
+    return result
 
 class Test_in_order_non_recur(unittest.TestCase):
     def test_basic_functionality(self):
@@ -31,6 +43,8 @@ class Test_in_order_non_recur(unittest.TestCase):
         tr = BinaryTree.from_in_and_pre_order_traversal(in_ordr, pre_ordr)
         curr_in_order = print_in_order_non_recur(tr.root)
         self.assertEqual(curr_in_order, in_ordr)
+        self.assertEqual(print_in_order_non_recur_book_sol(
+            tr.root), in_ordr)
 
     def test_basic_functionality1(self):
         tr = get_toy_binary_tree2()
