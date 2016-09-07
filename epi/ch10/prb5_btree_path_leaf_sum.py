@@ -8,6 +8,11 @@ import unittest
 def get_sum_root_to_leaf(n):
     pass
 
+class Test_sum_root_to_leaf(unittest.TestCase):
+
+    def test_basic_functionality(self):
+        pass
+
 
 if __name__ == '__main__':
     unittest.main()
