@@ -1,3 +1,4 @@
+from __future__ import print_function
 'classes related to binary trees and binary search trees'
 
 class BinaryTree:
