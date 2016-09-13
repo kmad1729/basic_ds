@@ -1,4 +1,4 @@
-'compute the math.floor of square too of n'
+'compute the math.floor of square root of n'
 
 import unittest
 import math
