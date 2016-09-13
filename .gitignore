@@ -5,9 +5,11 @@
 !*/
 !*.txt
 !Makefile
+!*.md
 
 *.exe
 *.swp
 *.out
 *~
 revise
+
