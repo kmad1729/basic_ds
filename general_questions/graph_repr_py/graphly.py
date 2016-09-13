@@ -6,6 +6,7 @@ graph = {
             'A': ['B', 'C'],
             'B': ['C', 'D'],
             'C': ['D'],
+            'D': ['C'],
             'E': ['F', 'G'],
             'F': ['C'],
         }
@@ -41,6 +42,20 @@ def find_all_paths(graph, start, end, path = []):
                 paths.append(new_path)
     return paths
             
+def find_shortest_path(graph, start, end, path = []):
+    path = path + [start]
+    if start == end:
+        return path
+    if not graph.has_key(start):
+        return None
+    shortest_path = None
+    for node in graph[start]:
+        if node not in path:
+            new_path = find_shortest_path(graph, node, end, path)
+            if new_path:
+                if not shortest_path or len(new_path) < len(shortest_path):
+                    shortest_path = new_path
+    return shortest_path
 
 
 
@@ -82,5 +97,20 @@ class Test_find_all_paths(unittest.TestCase):
         self.assertTrue(find_all_paths(graph, 'G', 'A') == [])
         self.assertTrue(find_all_paths(graph, 'F', 'E') == [])
 
+class Test_find_shortest_path(unittest.TestCase):
+
+    def test_positive_tc(self):
+        self.assertEquals(find_shortest_path(graph, 'A', 'D'), ['A', 'B', 'D'])
+        self.assertEquals(find_shortest_path(graph, 'A', 'C'), ['A', 'C'])
+        self.assertEquals(find_shortest_path(graph, 'E', 'F'), ['E', 'F'])
+        self.assertEquals(find_shortest_path(graph, 'A', 'B'), ['A', 'B'])
+        self.assertEquals(find_shortest_path(graph, 'B', 'D'), ['B', 'D'])
+        self.assertEquals(find_shortest_path(graph, 'D', 'C'), ['D', 'C'])
+        self.assertEquals(find_shortest_path(graph, 'C', 'D'), ['C', 'D'])
+
+    def test_negative_tc(self):
+        self.assertTrue(find_shortest_path(graph, 'B', 'F') == None)
+        self.assertTrue(find_shortest_path(graph, 'E', 'A') == None)
+        self.assertTrue(find_shortest_path(graph, 'G', 'A') == None)
 if __name__ == '__main__':
     unittest.main()
