@@ -48,7 +48,7 @@ class Test_RunningMedian(unittest.TestCase):
     def setUp(self):
         self.rm = RunningMedian()
 
-    def test_insert(self):
+    def test_insert1(self):
         elems_to_inset = [
                 (4, 4), 
                 (0, 2), 
@@ -67,6 +67,27 @@ class Test_RunningMedian(unittest.TestCase):
                         calc_median= self.rm.getMedian(),
                         elem = elem))
 
+    def test_insert2(self):
+        elems_to_inset = [
+                (1, 1),
+                (3, 2),
+                (8, 3),
+                (9, 5.5),
+                (6, 6),
+                (4, 5),
+                (5, 5),
+                (7, 5.5),
+                (2, 5),
+                (0, 4.5)]
+        for elem, exp_median in elems_to_inset:
+            self.rm.insert(elem)
+
+            self.assertEquals(exp_median, self.rm.getMedian(),
+                    "expected median = {exp_median}; got = {calc_median} "
+                    "after inserting element = {elem}".format(
+                        exp_median = exp_median,
+                        calc_median= self.rm.getMedian(),
+                        elem = elem))
 
 
 
