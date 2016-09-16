@@ -48,6 +48,12 @@ class TestBinaryTree(unittest.TestCase):
         print("(" + " ".join(map(str, post_order)) + " )")
         self.assertEqual(5, tr.maxDepth())
 
+    def test_binary_tree_in_order_path(self):
+        in_ordr = [1, 3, 16, 29, 14, 86, 4, 18, 69, 63, 141]
+        pre_ordr = [4, 3, 1, 29, 16, 86, 14, 69, 18, 141, 63]
+        tr = BinaryTree.from_in_and_pre_order_traversal(in_ordr, pre_ordr)
+        self.assertEqual(tr.getInOrderPath(), in_ordr)
+
 
 class TestBinarySearchTree(unittest.TestCase):
     def setUp(self):
@@ -82,6 +88,7 @@ class TestBinaryTreeWithParent(unittest.TestCase):
         self.assertEqual(tr.root['left'], tr.root['left']['left']['parent'])
         self.assertEqual(141, tr.root['right']['right']['left']['parent']['data'])
         self.assertEqual(tr.root['right'], tr.root['right']['left']['parent'])
+        self.assertEqual(tr.getInOrderPath(), in_ordr)
 
 
 if __name__ == '__main__':

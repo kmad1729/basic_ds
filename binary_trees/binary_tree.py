@@ -26,11 +26,12 @@ class BinaryTree:
     def maxDepth(self):
         return self._util_maxDepth(self.root)
 
-    def _util_printInOrder(self, n):
+    def _util_printInOrder(self, n, path=[]):
         if n != None:
-            self._util_printInOrder(n['left'])
+            self._util_printInOrder(n['left'], path)
             print(n['data'], end = " ")
-            self._util_printInOrder(n['right'])
+            path.append(n['data'])
+            self._util_printInOrder(n['right'], path)
 
     def _util_printPostOrder(self, n):
         if n != None:
@@ -47,6 +48,11 @@ class BinaryTree:
         print('(', end = "")
         self._util_printInOrder(self.root)
         print(")")
+
+    def getInOrderPath(self):
+        p = []
+        self._util_printInOrder(self.root, p)
+        return p
 
     
     def _utils_get_node_from_traversals(self, in_order_traversal, pre_order_traversal):
