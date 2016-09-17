@@ -70,6 +70,12 @@ class TestBinarySearchTree(unittest.TestCase):
 
         self.toy_bst = get_toy_binary_search_tree()
 
+    def test_maxValue(self):
+        self.assertRaises(TypeError, self.empty_bst.maxValue)
+        self.assertEqual(-1, self.single_node_bst.maxValue())
+        self.assertEqual(102, self.small_bst.maxValue())
+        self.assertEqual(102, self.toy_bst.maxValue())
+
     def test_minValue(self):
         self.assertRaises(TypeError, self.empty_bst.minValue)
         self.assertEqual(-1, self.single_node_bst.minValue())

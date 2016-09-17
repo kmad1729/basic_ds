@@ -128,6 +128,15 @@ class BinarySearchTree(BinaryTree):
             n = n['left']
         return n['data']
 
+    def maxValue(self):
+        if self.root == None:
+            raise TypeError('maxValue for empty bst not defined!')
+
+        n = self.root
+        while n['right']:
+            n = n['right']
+        return n['data']
+
 
 #### TEST CODE #####
 
