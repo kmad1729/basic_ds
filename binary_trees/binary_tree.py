@@ -157,19 +157,24 @@ class BinarySearchTree(BinaryTree, BinaryTreeWithPrarent):
                     n['parent']['left'] = n['right']
                 else:
                     n['parent']['right'] = n['right']
+                n['right']['parent'] = n['parent']
         else:
             if n['right'] == None:
                 if n == n['parent']['left']:
                     n['parent']['left'] = n['left']
                 else:
                     n['parent']['right'] = n['left']
+                n['left']['parent'] = n['parent']
             else:
                 #find the max value of left sub tree and swap n's data with the max value node
                 left_subtree_max_node = self._maxValue_node(n['left'])
                 n['data'], left_subtree_max_node['data'] = \
                         left_subtree_max_node['data'], n['data']
-                left_subtree_max_node['parent']['right'] = \
-                        left_subtree_max_node['left']
+                if left_subtree_max_node['left']:
+                    left_subtree_max_node['parent']['right'] = \
+                            left_subtree_max_node['left']
+                else:
+                    left_subtree_max_node['parent']['left'] = None
 
     def _find_node(self, n, tgt):
         if n:

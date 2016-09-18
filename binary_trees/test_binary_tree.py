@@ -101,6 +101,22 @@ class TestBinarySearchTree(unittest.TestCase):
         tr.delete_data(2)
         self.assertEquals(tr.getInOrderPath(), expected_in_order)
 
+        expected_in_order = \
+                [1, 4, 5, 9, 23, 36, 52]
+        tr.delete_data(3)
+        self.assertEquals(tr.getInOrderPath(), expected_in_order)
+
+        expected_in_order = \
+                [1, 4, 5, 9, 23, 36]
+        tr.delete_data(52)
+        self.assertEquals(tr.getInOrderPath(), expected_in_order)
+
+        expected_in_order = \
+                [1, 5, 9, 23, 36]
+        import pdb; pdb.set_trace()
+        tr.delete_data(4)
+        self.assertEquals(tr.getInOrderPath(), expected_in_order)
+
 
 
 class TestBinaryTreeWithParent(unittest.TestCase):
