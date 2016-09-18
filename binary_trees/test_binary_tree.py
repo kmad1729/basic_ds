@@ -82,6 +82,26 @@ class TestBinarySearchTree(unittest.TestCase):
         self.assertEqual(-2, self.small_bst.minValue())
         self.assertEqual(-1, self.toy_bst.minValue())
 
+    def test_delete_node(self):
+        values = [7, 3, 23, 1, 5, 9, 52, 2, 4, 36]
+        tr = BinarySearchTree()
+        for v in values:
+            tr.insert(v)
+        tr.populate_parent()
+
+        expected_in_order_tree_after_7_delete = \
+                [1, 2, 3, 4, 5, 9, 23, 36, 52]
+        tr.delete_data(7)
+        self.assertEquals(tr.getInOrderPath(), expected_in_order_tree_after_7_delete)
+        self.assertRaises(Exception, tr.delete_data, 6)
+
+
+        expected_in_order = \
+                [1, 3, 4, 5, 9, 23, 36, 52]
+        tr.delete_data(2)
+        self.assertEquals(tr.getInOrderPath(), expected_in_order)
+
+
 
 class TestBinaryTreeWithParent(unittest.TestCase):
     def test_populate_parent(self):

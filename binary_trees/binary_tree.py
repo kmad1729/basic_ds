@@ -103,7 +103,7 @@ class BinaryTreeWithPrarent(BinaryTree):
 
 
 
-class BinarySearchTree(BinaryTree):
+class BinarySearchTree(BinaryTree, BinaryTreeWithPrarent):
 
     def _util_insert(self, data, n):
         if n == None:
@@ -128,6 +128,11 @@ class BinarySearchTree(BinaryTree):
             n = n['left']
         return n['data']
 
+    def _maxValue_node(self, n):
+        while n['right']:
+            n = n['right']
+        return n
+
     def maxValue(self):
         if self.root == None:
             raise TypeError('maxValue for empty bst not defined!')
@@ -136,6 +141,53 @@ class BinarySearchTree(BinaryTree):
         while n['right']:
             n = n['right']
         return n['data']
+
+    def _deleteNode(self, n):
+        assert n, "cannot delete from an empty node!"
+        assert 'parent' in n, "each node has to have a parent pointer"
+
+        if  n['left'] == None:
+            if n['right'] == None:
+                if n == n['parent']['left']:
+                    n['parent']['left'] = None
+                else:
+                    n['parent']['right'] = None
+            else:
+                if n == n['parent']['left']:
+                    n['parent']['left'] = n['right']
+                else:
+                    n['parent']['right'] = n['right']
+        else:
+            if n['right'] == None:
+                if n == n['parent']['left']:
+                    n['parent']['left'] = n['left']
+                else:
+                    n['parent']['right'] = n['left']
+            else:
+                #find the max value of left sub tree and swap n's data with the max value node
+                left_subtree_max_node = self._maxValue_node(n['left'])
+                n['data'], left_subtree_max_node['data'] = \
+                        left_subtree_max_node['data'], n['data']
+                left_subtree_max_node['parent']['right'] = \
+                        left_subtree_max_node['left']
+
+    def _find_node(self, n, tgt):
+        if n:
+            if n['data'] == tgt:
+                return n
+            elif tgt < n['data']:
+                return self._find_node(n['left'], tgt)
+            else:
+                return self._find_node(n['right'], tgt)
+
+        return None
+
+    def delete_data(self, d):
+        n = self._find_node(self.root, d)
+        assert n, "could not find data {d} in the tree".format(d=d)
+        self._deleteNode(n)
+
+
 
 
 #### TEST CODE #####
