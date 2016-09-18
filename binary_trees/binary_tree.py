@@ -173,6 +173,7 @@ class BinarySearchTree(BinaryTree, BinaryTreeWithPrarent):
                 if left_subtree_max_node['left']:
                     left_subtree_max_node['parent']['right'] = \
                             left_subtree_max_node['left']
+                    left_subtree_max_node['left']['parent'] = left_subtree_max_node['parent']
                 else:
                     left_subtree_max_node['parent']['left'] = None
 

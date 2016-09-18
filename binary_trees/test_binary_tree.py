@@ -113,7 +113,6 @@ class TestBinarySearchTree(unittest.TestCase):
 
         expected_in_order = \
                 [1, 5, 9, 23, 36]
-        import pdb; pdb.set_trace()
         tr.delete_data(4)
         self.assertEquals(tr.getInOrderPath(), expected_in_order)
 
