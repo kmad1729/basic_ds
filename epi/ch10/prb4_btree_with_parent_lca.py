@@ -3,7 +3,7 @@ Assume that each node has a parent pointer
 '''
 
 import unittest
-from binary_tree import BinaryTreeWithPrarent
+from binary_tree import BinaryTree
 
 def get_depth(n):
     result = 0
@@ -36,7 +36,7 @@ class Test_get_LCA_with_Parent(unittest.TestCase):
     def setUp(self):
         in_ordr = [1, 3, 16, 29, 14, 86, 4, 18, 69, 63, 141]
         pre_ordr = [4, 3, 1, 29, 16, 86, 14, 69, 18, 141, 63]
-        self.tr = BinaryTreeWithPrarent.from_in_and_pre_order_traversal(in_ordr, pre_ordr)
+        self.tr = BinaryTree.from_in_and_pre_order_traversal(in_ordr, pre_ordr)
         self.tr.populate_parent()
 
     def test_get_LCA1(self):
