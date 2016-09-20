@@ -1,6 +1,6 @@
 import unittest
 
-from compute_scc import DFS_loop, get_G_rev
+from compute_scc import DFS_loop, get_G_rev, get_relabled_graph
 
 class Test_DFS_loop(unittest.TestCase):
     
@@ -43,6 +43,32 @@ class Test_DFS_loop(unittest.TestCase):
     def test_get_G_rev(self):
         computed_rev = get_G_rev(self.G)
         self.assertEquals(computed_rev, self.G_rev)
+
+    def test_get_G_rev_small_graph(self):
+        G = { 1:[2], 2:[3], 3:[1]}
+        expected_rev = { 2:[1], 3:[2], 1:[3]}
+                
+        computed_rev = get_G_rev(G)
+        self.assertEquals(computed_rev, expected_rev)
+
+    def test_get_relabled_graph(self):
+        num_nodes = len(self.G_rev)
+        finish_times = [1e9] * (num_nodes + 1)
+        DFS_loop(self.G_rev, finish_times)
+        expected_relabling = {
+                9: [7],
+                7: [8],
+                8: [9],
+                6: [1, 9],
+                1: [5],
+                5: [6],
+                4: [2, 5],
+                3: [4],
+                2: [3],
+                }
+        relabled = get_relabled_graph(self.G, finish_times)
+        self.assertEquals(relabled, expected_relabling)
+        
 
 
 if __name__ == '__main__':
