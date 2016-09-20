@@ -1,6 +1,6 @@
 import unittest
 
-from compute_scc import DFS_loop
+from compute_scc import DFS_loop, get_G_rev
 
 class Test_DFS_loop(unittest.TestCase):
     
@@ -39,6 +39,10 @@ class Test_DFS_loop(unittest.TestCase):
         expected_finish_times = [7, 3, 1, 8, 2, 5, 9, 4, 6 ]
 
         self.assertEquals(expected_finish_times, finish_times[1:])
+
+    def test_get_G_rev(self):
+        computed_rev = get_G_rev(self.G)
+        self.assertEquals(computed_rev, self.G_rev)
 
 
 if __name__ == '__main__':

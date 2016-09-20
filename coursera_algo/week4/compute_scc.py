@@ -40,5 +40,11 @@ def DFS_loop(G, finish_times):
                     leader_nodes=leader_nodes)
     return leader_nodes
 
+def get_G_rev(G):
+    num_nodes = len(G)
+    result = dict((i, []) for i in range(1,num_nodes+1))
 
-
+    for src_node in G:
+        for dst_node in G[src_node]:
+            result[dst_node].append(src_node)
+    return result
