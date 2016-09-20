@@ -63,4 +63,6 @@ def compute_SCC(G):
     finish_times = [1e9] * (num_nodes + 1)
     DFS_loop(G_Rev, finish_times)
     G = get_relabled_graph(G, finish_times)
+    leader_nodes = DFS_loop(G, finish_times)
+    return leader_nodes
 
