@@ -1,7 +1,7 @@
 import unittest
 
 from compute_scc import DFS_loop, get_G_rev, get_relabled_graph, \
-        compute_SCC
+        compute_SCC, graph_data_from_file
 
 class Test_DFS_loop(unittest.TestCase):
     
@@ -74,6 +74,11 @@ class Test_DFS_loop(unittest.TestCase):
         expected_leader_nodes = [6, 4, 4, 4, 6, 6, 9, 9, 9]
         computed_leader_nodes = compute_SCC(self.G)
         self.assertEquals(expected_leader_nodes, computed_leader_nodes[1:])
+
+    def test_graph_data_from_file(self):
+        fname  = 'inp1.txt'
+        d = graph_data_from_file(fname)
+        self.assertEquals(d, self.G)
         
 
 

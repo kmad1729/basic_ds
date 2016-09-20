@@ -6,6 +6,7 @@
 !*.txt
 !Makefile
 !*.md
+!*.jpg
 
 *.exe
 *.swp

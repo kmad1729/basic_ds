@@ -1,4 +1,8 @@
+'compute the strongly connected components of a directed graph.'
 
+from __future__ import print_function
+import argparse
+from collections import defaultdict, Counter
 
 
 def DFS(G, start_node, source_node, start_time, finish_times,
@@ -64,5 +68,32 @@ def compute_SCC(G):
     DFS_loop(G_Rev, finish_times)
     G = get_relabled_graph(G, finish_times)
     leader_nodes = DFS_loop(G, finish_times)
-    return leader_nodes
+    return leader_nodes[1:]
+
+def graph_data_from_file(fname):
+    data = defaultdict(list)
+    with open(fname, 'r') as f:
+        for l in f:
+            if not l.startswith('#'):
+                src, dst = map(int, l.split())
+                data[src].append(dst)
+
+    return dict(data)
+
+if __name__ == '__main__':
+    parser = argparse.ArgumentParser(description="compute strongly connected components"
+            " in a graph")
+    parser.add_argument('f', help='input file name/path')
+    args = parser.parse_args()
+    fname = args.f
+    G = graph_data_from_file(fname)
+    leader_nodes = compute_SCC(G)
+    num_most_common = 5
+    print("here are the largest {i} components".format(i=num_most_common))
+    for leader, num_components in Counter(leader_nodes).most_common(num_most_common):
+        print("there are {n_c} components with leader {c}".format(n_c=num_components,
+            c=leader))
+
+
+
 
