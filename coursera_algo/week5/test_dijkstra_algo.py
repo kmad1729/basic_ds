@@ -5,26 +5,22 @@ class Test_heap(unittest.TestCase):
 
     def setUp(self):
         self.h = []
+        self.n_h_p_m = {}
+        dijkstra_heap_insert(self.h, {'node':'A', 'dist':3}, self.n_h_p_m)
+        dijkstra_heap_insert(self.h, {'node':'B', 'dist':6}, self.n_h_p_m)
+        dijkstra_heap_insert(self.h, {'node':'C', 'dist':0}, self.n_h_p_m)
+        dijkstra_heap_insert(self.h, {'node':'D', 'dist':8}, self.n_h_p_m)
 
+    def test_heap_decrease_key
     def test_heap_insert(self):
-        h = []
-        n_h_p_m = {}
-        exp_len = 0
-        dijkstra_heap_insert(h, {'node':'A', 'dist':3}, n_h_p_m)
-        exp_len += 1
+        exp_len=4
+        self.assertEquals(len(self.h), exp_len)
+        self.assertEquals(self.h[0], {'node':'C', 'dist':0})
 
-        dijkstra_heap_insert(h, {'node':'B', 'dist':6}, n_h_p_m)
-        exp_len += 1
-
-        dijkstra_heap_insert(h, {'node':'C', 'dist':0}, n_h_p_m)
-        exp_len += 1
-
-        self.assertEquals(len(h), exp_len)
-        self.assertEquals(h[0], {'node':'C', 'dist':0})
-
-        self.assertEquals(0, n_h_p_m['C'])
-        self.assertEquals(1, n_h_p_m['B'])
-        self.assertEquals(2, n_h_p_m['A'])
+        self.assertEquals(0, self.n_h_p_m['C'])
+        self.assertEquals(1, self.n_h_p_m['B'])
+        self.assertEquals(2, self.n_h_p_m['A'])
+        self.assertEquals(3, self.n_h_p_m['D'])
 
 if __name__ == '__main__':
     unittest.main()
