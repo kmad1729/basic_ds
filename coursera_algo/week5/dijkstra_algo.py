@@ -38,12 +38,11 @@ def dijkstra_heap_decrease_key(h, pos, new_key, n_h_p_m):
     while pos > 0 and h[_get_parent_pos(pos)]['dist'] > h[pos]['dist']:
         parent_pos = _get_parent_pos(pos)
         #swap node at pos with node at parent_pos
-        print("swapping pos! between {parent_pos} and {pos}".format(parent_pos=parent_pos, pos=pos))
         h[parent_pos], h[pos] = h[pos], h[parent_pos]
 
         #update the node_heap_position_map
-        n_h_p_m[h[parent_pos]['node']] = pos
-        n_h_p_m[h[pos]['node']] = parent_pos
+        n_h_p_m[h[pos]['node']] = pos
+        n_h_p_m[h[parent_pos]['node']] = parent_pos
         
         pos = parent_pos
 
