@@ -11,6 +11,17 @@ class Test_heap(unittest.TestCase):
         dijkstra_heap_insert(self.h, {'node':'C', 'dist':2}, self.n_h_p_m)
         dijkstra_heap_insert(self.h, {'node':'D', 'dist':8}, self.n_h_p_m)
 
+    def test_heap_extract_min(self):
+        min_dist, min_node = dijkstra_heap_extract_min(self.h, self.n_h_p_m)
+        self.assertEquals(min_dist, 2)
+        self.assertEquals(min_node, 'C')
+        self.assertEquals(len(self.h), 3)
+
+        self.assertEquals(0, self.n_h_p_m['A'])
+        self.assertEquals(1, self.n_h_p_m['B'])
+        self.assertEquals(2, self.n_h_p_m['D'])
+
+
     def test_heap_decrease_key(self):
         new_data = {'node':'D', 'dist':1}
         dijkstra_heap_decrease_key(self.h, len(self.h) - 1, 1, self.n_h_p_m)

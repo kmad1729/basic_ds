@@ -47,5 +47,36 @@ def dijkstra_heap_decrease_key(h, pos, new_key, n_h_p_m):
         pos = parent_pos
 
 
+def dijkstra_heap_min_heapify(h, pos, n_h_p_m):
+    '''maintain the min heap property at pos. Child subtrees of pos are 
+    assumed to be min heaps
+    '''
+    heap_size = len(h)
+    left_child = 2 * pos + 1
+    right_child = 2 * pos + 2
+    min_idx = pos
+    if left_child < heap_size and h[min_idx]['dist'] > h[left_child]['dist']:
+        min_idx = left_child
+
+    if right_child < heap_size and h[min_idx]['dist'] > h[right_child]['dist']:
+        min_idx = right_child
+
+    if min_idx != pos:
+        h[min_idx], h[pos] = h[pos], h[min_idx]
+        n_h_p_m[h[min_idx]['node']] = min_idx
+        n_h_p_m[h[pos]['node']] = pos
+        dijkstra_heap_min_heapify(h, min_idx, n_h_p_m)
+
+def dijkstra_heap_extract_min(h, n_h_p_m):
+    if len(h) <= 0:
+        raise Exception('heap size <= 0. no min!')
+    result = h[0]
+    h[0] = h.pop()
+    n_h_p_m[h[0]['node']] = 0
+    dijkstra_heap_min_heapify(h, 0, n_h_p_m)
+    return result['dist'], result['node']
+
+
+
 
 
