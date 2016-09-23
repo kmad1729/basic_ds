@@ -3,6 +3,7 @@ distances to all the nodes in the graph. Assume weights to be non-negative
 '''
 
 from __future__ import print_function
+import argparse
 
 ## HELPER FUNCTIONS ## HEAP IMPLEMENTATION ##
 # maintain a map of a node and its position in the heap in variable node_heap_position_map
@@ -103,5 +104,43 @@ def dijkstra_get_shortest_paths_from_single_node(G, source_node):
 
     return dists
 
+def read_file_get_graph(fname):
+    result = {}
+    with open(fname, 'r') as f:
+        for l in f:
+            if l.startswith('#'): continue
+            obs = l.split()
+            src, dests = obs[0], obs[1:]
+            result[src] = []
+            for d in dests:
+                n, w = d.split(',')
+                result[src].append((n, int(w)))
+    return result
 
+
+if __name__ == '__main__':
+    parser = argparse.ArgumentParser(description='calculate the shortest path distance from'
+            ' source s to a given list of nodes')
+    parser.add_argument('f', help='input filename representing the graph')
+    parser.add_argument('s', help='source node id')
+    parser.add_argument('-d', '--dest_nodes',
+            type=lambda s: [(item) for item in s.split(',')],
+            help='get distances to the comma-separated nodes specified. All distances if not specified')
+
+    args = parser.parse_args()
+    print('args.dest_nodes = {d}'.format(d=args.dest_nodes))
+    G = read_file_get_graph(args.f)
+    result = []
+    dists = dijkstra_get_shortest_paths_from_single_node(G, args.s)
+    if args.dest_nodes:
+        for dest in args.dest_nodes:
+            print('shortest distance from {s}->{d} = {distance}'.format(s=args.s, d=dest,
+                distance=dists[dest]))
+            result.append(dists[dest])
+    else:
+        for n in G:
+            print('shortest distance from {s}->{d} = {distance}'.format(s=args.s, d=n,
+                distance=dists[n]))
+            result.append(dists[dest])
+    print(result)
 
