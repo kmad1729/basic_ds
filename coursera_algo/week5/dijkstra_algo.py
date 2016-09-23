@@ -71,12 +71,37 @@ def dijkstra_heap_extract_min(h, n_h_p_m):
     if len(h) <= 0:
         raise Exception('heap size <= 0. no min!')
     result = h[0]
-    h[0] = h.pop()
-    n_h_p_m[h[0]['node']] = 0
-    dijkstra_heap_min_heapify(h, 0, n_h_p_m)
+    last_elem = h.pop()
+    if len(h) != 0:
+        h[0] = last_elem
+        n_h_p_m[h[0]['node']] = 0
+        dijkstra_heap_min_heapify(h, 0, n_h_p_m)
+
     return result['dist'], result['node']
 
 
+def dijkstra_get_shortest_paths_from_single_node(G, source_node):
+    'Calculate the shortest path to different nodes from source_node in graph G'
+    dists = dict((k, INF) for k in G)
+    edge_pq = []
+    node_heap_position_map = {}
+    dijkstra_heap_insert(edge_pq, {'dist': 0, 'node': source_node}, node_heap_position_map)
+    while len(edge_pq):
+        min_dist, min_node = dijkstra_heap_extract_min(edge_pq, node_heap_position_map)
+        dists[min_node] = min_dist
+        for n, d in G[min_node]:
+            if dists[n] > d + dists[min_node]:
+                new_dist = d + dists[min_node]
+                dists[n] = new_dist
+                n_heap_pos = node_heap_position_map.get(n, None)
+                if n_heap_pos != None:
+                    dijkstra_heap_decrease_key(edge_pq, n_heap_pos, new_dist,
+                            node_heap_position_map)
+                else:
+                    dijkstra_heap_insert(edge_pq, {'dist': new_dist, 'node': n}, 
+                            node_heap_position_map)
+
+    return dists
 
 
 
