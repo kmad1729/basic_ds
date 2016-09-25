@@ -45,31 +45,39 @@ def check_sums_in_sorted_list(s, tgt_sum_min, tgt_sum_max):
 
     head_ptr = 0
     tail_ptr = len(l) - 1
-        
 
-    while(head_ptr < tail_ptr):
+    while head_ptr < tail_ptr:
         head = l[head_ptr]
         tail = l[tail_ptr]
+
         if head + tail < tgt_sum_min:
             head_ptr += 1
         elif head + tail > tgt_sum_max:
             tail_ptr -= 1
         else:
-            logger.debug('target sums lie betweein indices {h} and {t}'.format(h=head_ptr, t=tail_ptr))
-            for t_ptr in range(tail_ptr, head_ptr, -1):
-                head = l[head_ptr]
-                tail = l[t_ptr]
-                if head + tail < tgt_sum_min:
-                    tgt_sum_min = head + tail
-                    break
-                elif head + tail > tgt_sum_max:
-                    tgt_sum_max = head + tail
-                    tail_ptr = t_ptr
-                    break
-                else:
+            t = tail_ptr
+            while(t > head_ptr):
+                tail = l[t]
+                if tgt_sum_min <= head + tail <= tgt_sum_max:
                     computed_targets.add(head + tail)
-            head_ptr += 1
+                    t -= 1
+                else:
+                    break
 
+            tail = l[tail_ptr]
+            h = head_ptr
+            while(h < tail_ptr):
+                head = l[h]
+                if tgt_sum_min <= head + tail <= tgt_sum_max:
+                    computed_targets.add(head + tail)
+                    h += 1
+                else:
+                    break
+            head_ptr += 1
+            tail_ptr -= 1
+
+        
+        
 
     return len(computed_targets)
 
