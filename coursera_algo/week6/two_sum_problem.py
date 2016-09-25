@@ -2,6 +2,9 @@
 
 from __future__ import print_function
 import argparse
+import logging
+
+logger = logging.basicConfig(level=logging.DEBUG, format='%(asctime)s %(message)s')
 
 def check_sum_exists(s, tgt_sum):
     '''check for a tgt_sum of 2 unique elements in set s
@@ -23,6 +26,9 @@ def count_tgt_sums_for_range(s, tgt_sum_min, tgt_sum_max):
     [tgt_sum_min, tgt_sum_max] inclusive
     '''
 
+    logger = logging.getLogger('__main__')
+    logger.debug('computing the number of target sums between {t_min} and {t_max}'.format(
+        t_min = tgt_sum_min, t_max= tgt_sum_max))
     result = 0
     for i in range(tgt_sum_min, tgt_sum_max + 1):
         if check_sum_exists(s, i):
@@ -50,7 +56,10 @@ if __name__ == '__main__':
 
     args = parser.parse_args()
 
+    logger = logging.getLogger('__main__')
+    logger.debug('started reading from input file {f}'.format(f=args.f))
     s = build_inp_set_from_file(args.f)
+    logger.debug('build the set from the input file')
     print("number of target sums in file between target sums {t_min} and {t_max} "
         "in the file = {sol}".format(t_min=args.t_min, t_max=args.t_max,
             sol= count_tgt_sums_for_range(s, args.t_min, args.t_max)))
