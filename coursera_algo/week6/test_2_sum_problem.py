@@ -1,6 +1,7 @@
 import unittest
 
-from two_sum_problem import check_sum_exists, count_tgt_sums_for_range
+from two_sum_problem import check_sum_exists, count_tgt_sums_for_range, \
+       check_sums_in_sorted_list
 
 class Test_2_sum_prob(unittest.TestCase):
 
@@ -33,6 +34,14 @@ class Test_2_sum_prob(unittest.TestCase):
         self.assertEquals(2, count_tgt_sums_for_range(self.s, 0, 1))
         self.assertEquals(9, count_tgt_sums_for_range(self.s, -1, 8))
         self.assertEquals(9, count_tgt_sums_for_range(self.s, -1, 9))
+
+    def test_count_sum_in_sorted_list(self):
+        self.assertEquals(0, check_sums_in_sorted_list(self.s, -2, -2))
+        self.assertEquals(1, check_sums_in_sorted_list(self.s, 0, 0))
+        self.assertEquals(2, check_sums_in_sorted_list(self.s, 0, 1))
+        self.assertEquals(2, check_sums_in_sorted_list(self.s, 0, 1))
+        self.assertEquals(9, check_sums_in_sorted_list(self.s, -1, 8))
+        self.assertEquals(9, check_sums_in_sorted_list(self.s, -1, 9))
 
 if __name__ == '__main__':
     unittest.main()

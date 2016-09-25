@@ -1,0 +1,11 @@
+-5
+7
+23
+5
+-5
+5
+-1
+23
+5
+7
+#for range [2, 5] expected sums = 2 where sums are [2, 4]
