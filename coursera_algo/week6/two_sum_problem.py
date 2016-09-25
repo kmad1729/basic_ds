@@ -76,9 +76,6 @@ def check_sums_in_sorted_list(s, tgt_sum_min, tgt_sum_max):
             head_ptr += 1
             tail_ptr -= 1
 
-        
-        
-
     return len(computed_targets)
 
 def build_inp_set_from_file(fname):
