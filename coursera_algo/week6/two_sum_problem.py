@@ -64,6 +64,7 @@ def check_sums_in_sorted_list(s, tgt_sum_min, tgt_sum_max):
                     break
                 elif head + tail > tgt_sum_max:
                     tgt_sum_max = head + tail
+                    tail_ptr = t_ptr
                     break
                 else:
                     computed_targets.add(head + tail)
