@@ -4,7 +4,8 @@ from __future__ import print_function
 import argparse
 import logging
 
-logger = logging.basicConfig(level=logging.DEBUG, format='%(asctime)s %(message)s')
+logging.basicConfig(level=logging.DEBUG, format='%(asctime)s %(message)s')
+logger = logging.getLogger('__main__')
 
 def check_sum_exists(s, tgt_sum):
     '''check for a tgt_sum of 2 unique elements in set s
@@ -26,7 +27,6 @@ def count_tgt_sums_for_range(s, tgt_sum_min, tgt_sum_max):
     [tgt_sum_min, tgt_sum_max] inclusive
     '''
 
-    logger = logging.getLogger('__main__')
     logger.debug('computing the number of target sums between {t_min} and {t_max}'.format(
         t_min = tgt_sum_min, t_max= tgt_sum_max))
     result = 0
@@ -37,22 +37,39 @@ def count_tgt_sums_for_range(s, tgt_sum_min, tgt_sum_max):
     return result
 
 def check_sums_in_sorted_list(s, tgt_sum_min, tgt_sum_max):
+    logger.debug('computing the number of target sums between {t_min} and {t_max}'.format(
+        t_min = tgt_sum_min, t_max= tgt_sum_max))
     l = sorted(s)
+    logger.debug('sorted the set s')
     computed_targets = set()
 
     head_ptr = 0
     tail_ptr = len(l) - 1
+        
+
     while(head_ptr < tail_ptr):
-        for t_ptr in range(tail_ptr, head_ptr, -1):
-            head = l[head_ptr]
-            tail = l[t_ptr]
-            if head + tail < tgt_sum_min:
-                break
-            elif head + tail > tgt_sum_max:
-                continue
-            else:
-                computed_targets.add(head + tail)
-        head_ptr += 1
+        head = l[head_ptr]
+        tail = l[tail_ptr]
+        if head + tail < tgt_sum_min:
+            head_ptr += 1
+        elif head + tail > tgt_sum_max:
+            tail_ptr -= 1
+        else:
+            logger.debug('target sums lie betweein indices {h} and {t}'.format(h=head_ptr, t=tail_ptr))
+            for t_ptr in range(tail_ptr, head_ptr, -1):
+                head = l[head_ptr]
+                tail = l[t_ptr]
+                if head + tail < tgt_sum_min:
+                    tgt_sum_min = head + tail
+                    head_ptr = t_ptr
+                    break
+                elif head + tail > tgt_sum_max:
+                    tgt_sum_max = head + tail
+                    tail_ptr = t_ptr
+                    break
+                else:
+                    computed_targets.add(head + tail)
+            head_ptr += 1
 
 
     return len(computed_targets)
@@ -80,9 +97,9 @@ if __name__ == '__main__':
     logger = logging.getLogger('__main__')
     logger.debug('started reading from input file {f}'.format(f=args.f))
     s = build_inp_set_from_file(args.f)
+    logger.debug('built the set from the input file')
     #sol = count_tgt_sums_for_range(s, args.t_min, args.t_max)
     sol = check_sums_in_sorted_list(s, args.t_min, args.t_max)
-    logger.debug('build the set from the input file')
     msg ="number of target sums in file between target sums {t_min} and {t_max} " \
         "in the file = {sol}".format(t_min=args.t_min, t_max=args.t_max, sol=sol)
 
