@@ -60,9 +60,12 @@ if __name__ == '__main__':
     logger.debug('started reading from input file {f}'.format(f=args.f))
     s = build_inp_set_from_file(args.f)
     logger.debug('build the set from the input file')
-    print("number of target sums in file between target sums {t_min} and {t_max} "
+    msg ="number of target sums in file between target sums {t_min} and {t_max} " \
         "in the file = {sol}".format(t_min=args.t_min, t_max=args.t_max,
-            sol= count_tgt_sums_for_range(s, args.t_min, args.t_max)))
+            sol= count_tgt_sums_for_range(s, args.t_min, args.t_max))
+
+    logger.debug(msg)
+    print(msg)
         
 
 
