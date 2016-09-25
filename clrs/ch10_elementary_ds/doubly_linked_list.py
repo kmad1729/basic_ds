@@ -1,5 +1,7 @@
 #!/usr/bin/env python3
 
+from __future__ import print_function
+
 class DoublyLinkedList:
 
     def __init__(self):
