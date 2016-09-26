@@ -1,6 +1,6 @@
 import unittest
 
-from find_min_cut import reduce_graph, get_random_edge
+from find_min_cut import contract_graph, get_random_edge
 
 class Test_find_min_cut(unittest.TestCase):
 
@@ -17,9 +17,22 @@ class Test_find_min_cut(unittest.TestCase):
         self.assertTrue(rand_dest in self.G[rand_src])
         self.assertTrue(rand_src in self.G[rand_dest])
 
-    def test_reduce_graph(self):
-        new_id = len(self.G) + 1
-        new_g = reduce_graph(self.G, new_id)
+    def test_contract_graph(self):
+        edge_to_delete = (1, 3)
+        contract_graph(self.G, edge_to_delete)
+        expected_graph = {
+                2: [3, 4, 3], 
+                3: [2, 4, 2], 
+                4: [2, 3]}
+        self.assertEquals(expected_graph, self.G)
+
+        edge_to_delete = (3, 2)
+        contract_graph(self.G, edge_to_delete)
+        expected_graph = {
+                3:[4, 4],
+                4:[3, 3],
+                }
+        self.assertEquals(expected_graph, self.G)
 
 if __name__ == '__main__':
     unittest.main()
