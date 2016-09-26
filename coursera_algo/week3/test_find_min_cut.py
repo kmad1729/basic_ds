@@ -1,6 +1,7 @@
 import unittest
 
-from find_min_cut import contract_graph, get_random_edge
+from find_min_cut import contract_graph, get_random_edge, \
+        kargers_algo
 
 class Test_find_min_cut(unittest.TestCase):
 
@@ -33,6 +34,14 @@ class Test_find_min_cut(unittest.TestCase):
                 4:[3, 3],
                 }
         self.assertEquals(expected_graph, self.G)
+
+    def test_kargers_algo(self):
+        kargers_algo(self.G)
+        print(self.G)
+        self.assertEquals(2, len(self.G))
+
+        for k in self.G:
+            self.assertEquals(len(set(self.G[k])), 1)
 
 if __name__ == '__main__':
     unittest.main()
