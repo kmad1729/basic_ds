@@ -45,7 +45,8 @@ class Test_Stack_MaxVal(unittest.TestCase):
         self.assertRaises(Exception, stck.maxval)
         
         lst = [(3, 3), (2, 3), (5, 5), (4, 5), (1, 5), (17, 17),
-                (5, 17), (17, 17), (17, 17)]
+                (5, 17), (17, 17), (17, 17), (13, 17), (12, 17),
+                (5, 17)]
 
         for i in lst:
             stck.push(i[0])
