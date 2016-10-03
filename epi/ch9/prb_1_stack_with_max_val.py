@@ -18,7 +18,7 @@ class Stack_MaxVal:
         if self.top is None:
             new_item['max_val'] = item
         else:
-            new_item['max_val'] = max(item, self.top['data'])
+            new_item['max_val'] = max(item, self.top['max_val'])
 
         self.top = new_item
 
@@ -44,15 +44,13 @@ class Test_Stack_MaxVal(unittest.TestCase):
         self.assertRaises(Exception, stck.pop)
         self.assertRaises(Exception, stck.maxval)
         
-        lst = [(3, 3), (2, 3), (5, 5), (1, 5), (17, 17)]
+        lst = [(3, 3), (2, 3), (5, 5), (4, 5), (1, 5), (17, 17),
+                (5, 17), (17, 17), (17, 17)]
 
         for i in lst:
             stck.push(i[0])
-        self.assertEquals(17, stck.maxval())
-        self.assertEquals(17, stck.pop())
-        self.assertEquals(5, stck.maxval())
 
-        idx = len(lst) - 2
+        idx = len(lst) - 1
         while not stck.empty():
             max_top = stck.maxval()
             top_val = stck.pop()
