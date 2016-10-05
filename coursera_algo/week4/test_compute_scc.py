@@ -6,6 +6,7 @@ from compute_scc import DFS_loop, get_G_rev, get_relabled_graph, \
 class Test_DFS_loop(unittest.TestCase):
     
     def setUp(self):
+
         self.G = {
                 1 : [4],
                 4 : [7],
