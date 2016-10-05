@@ -9,8 +9,10 @@ def rpn_eval(expression):
     utils_stack = []
     for c in expression.split(','):
         if c in OPERATORS:
-            a = utils_stack.pop()
+            if c == '/':
+                c += '/'
             b = utils_stack.pop()
+            a = utils_stack.pop()
             output = eval(a + c + b)
             utils_stack.append(str(output))
         else:
@@ -30,7 +32,7 @@ class Test_RPN_Eval(unittest.TestCase):
                 }
 
         for expression, result in test_cases.items():
-            self.assertEquals(result, rpn_eval(expression),
+            self.assertEqual(result, rpn_eval(expression),
                     '{e} did not evaluate to {a}'.format(e=expression,
                         a=result))
 
