@@ -36,6 +36,8 @@ class Test_well_formedness(unittest.TestCase):
                 '([{}{}{}])()': True,
                 '({' : False,
                 '[([[)]]]' : False,
+                '[[([[]])][]]' : True,
+                '[((){[[]{}]}){}{}]': True,
                 }
 
         for inp_str, expected in test_cases.items():
