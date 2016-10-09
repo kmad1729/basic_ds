@@ -64,6 +64,9 @@ class Test_Queue(unittest.TestCase):
 
         self.assertRaises(Exception, q.dequeue)
 
+        q.enqueue(-1e9)
+        self.assertEqual(-1e9, q.dequeue())
+
 
 if __name__ == '__main__':
     unittest.main()
