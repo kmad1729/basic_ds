@@ -19,7 +19,7 @@ def normalize_path_names(pth):
             continue
         elif directory == '..':
             if len(util_stack) == 0 or util_stack[-1] == '..':
-                util_stack.append('..')
+                util_stack.append(directory)
             else:
                 if util_stack[-1] == '/':
                     raise Exception("Invalid path name")
@@ -27,10 +27,21 @@ def normalize_path_names(pth):
         else:
             util_stack.append(directory)
 
-    if util_stack[0] == '/':
-        return '/'.join([''] + util_stack[1:])
-    else:
-        return '/'.join(util_stack)
+    print('pth = {p} util_stack = {u}'.format(p=pth, u=util_stack))
+    if len(util_stack) == 0:
+        return ''
+
+
+    result = util_stack[0]
+    idx = 1
+    while idx < len(util_stack):
+        if idx == 1 and result == '/':
+            result += util_stack[idx]
+        else:
+            result += '/' + util_stack[idx]
+        idx += 1
+    return result
+
 
 
 
