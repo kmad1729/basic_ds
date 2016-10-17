@@ -82,5 +82,31 @@ class Test_jump_order(unittest.TestCase):
         self.assertEqual(d_node['order'], 4)
         self.assertEqual(e_node['order'], 1)
                 
+    def test_3(self):
+        a_node = {'order': -1}
+        b_node = {'order': -1}
+        c_node = {'order': -1}
+        d_node = {'order': -1}
+
+        a_node['jump'] = c_node
+        b_node['jump'] = d_node
+        c_node['jump'] = b_node
+        d_node['jump'] = d_node
+
+        a_node['next'] = b_node
+        b_node['next'] = c_node
+        c_node['next'] = d_node
+        d_node['next'] = None
+
+
+        head = a_node
+
+        calc_jump_first_order_recur(head)
+
+        self.assertEqual(a_node['order'], 0)
+        self.assertEqual(b_node['order'], 2)
+        self.assertEqual(c_node['order'], 1)
+        self.assertEqual(d_node['order'], 3)
+
 if __name__ == '__main__':
     unittest.main()
