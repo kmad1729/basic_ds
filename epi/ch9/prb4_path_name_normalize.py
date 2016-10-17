@@ -12,6 +12,36 @@ from collections import deque
 def normalize_path_names(pth):
     if pth == '':
         raise Exception("Empty path name is not valid")
+    if pth[0] == '/':
+        util_stack = ['/']
+    else:
+        util_stack = []
+
+    for d in pth.split('/'):
+        if d == '' or d == '.':
+            continue
+        elif d == '..':
+            if len(util_stack) == 0 or util_stack[-1] == '..':
+                util_stack.append('..')
+            else:
+                if util_stack[-1] == '/':
+                    raise Exception('cannot go before root /')
+                util_stack.pop()
+        else:
+            util_stack.append(d)
+
+    result = []
+    if len(util_stack) != 0:
+        result.append(util_stack[0])
+        idx = 1
+        while idx < len(util_stack):
+            if util_stack[0] == '/' and idx == 1:
+                result.append(util_stack[idx])
+            else:
+                result.append('/')
+                result.append(util_stack[idx])
+            idx += 1
+    return ''.join(result)
 
 
 
