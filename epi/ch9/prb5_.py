@@ -1,1 +1,0 @@
-'search posting list'
