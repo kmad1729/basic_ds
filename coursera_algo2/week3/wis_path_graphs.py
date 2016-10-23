@@ -48,5 +48,10 @@ class Test_max_weight_ind_set(unittest.TestCase):
         inp_wts = [5, 1, 4, 3, 6, 8]
         self.assertEqual({1, 3, 6}, get_max_wt_ind_set(inp_wts))
 
+    def test_3(self):
+        inp_wts = [1, 4, 5, 4]
+        self.assertEqual({2, 4}, get_max_wt_ind_set(inp_wts))
+
+
 if __name__ == '__main__':
     unittest.main()
