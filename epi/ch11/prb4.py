@@ -11,8 +11,7 @@ def get_k_closest(lst, k = 3):
         if len(h) < k:
             heappush(h, (-dist, p))
         else:
-            if -dist > h[0][0]:
-                heappushpop(h, (-dist, p))
+            heappushpop(h, (-dist, p))
 
     result = []
     while len(h) != 0:
